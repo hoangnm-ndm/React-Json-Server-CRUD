@@ -21,15 +21,25 @@ const Navbar = () => {
       <Toolbar>
         <NavLink to="/" className={classes.spacing}>
           {" "}
-          React JS Crud
+          Home
         </NavLink>
         <NavLink to="all" className={classes.spacing}>
           {" "}
-          All Users
+          All Products
         </NavLink>
         <NavLink to="add" className={classes.spacing}>
           {" "}
-          Add Users
+          Add Product
+        </NavLink>
+
+        <NavLink to="register" className={classes.spacing}>
+          {" "}
+          Register
+        </NavLink>
+
+        <NavLink to="login" className={classes.spacing}>
+          {" "}
+          Login
         </NavLink>
       </Toolbar>
     </AppBar>

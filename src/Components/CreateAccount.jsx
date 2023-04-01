@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Typography,
@@ -9,29 +9,19 @@ import {
   FormGroup,
   Button,
 } from "@material-ui/core";
-import { editUser, getallUsers } from "../service/api";
-import { useHistory, useParams } from "react-router-dom";
+import { signUp } from "../service/api";
+import { useHistory } from "react-router-dom";
 
 const initialValue = {
   name: "",
-  username: "",
   email: "",
-  phone: "",
+  password: "",
+  confirmPassword: "",
 };
 
-const EditUser = () => {
+const CreateAccount = () => {
   const [user, setUser] = useState(initialValue);
-  const { name, username, email, phone } = user;
-  const { id } = useParams();
-
-  useEffect(() => {
-    loadUserData();
-  }, []);
-
-  const loadUserData = async () => {
-    const response = await getallUsers(id);
-    setUser(response.data);
-  };
+  const { name, email, password, confirmPassword } = user;
 
   const history = useHistory();
 
@@ -42,8 +32,8 @@ const EditUser = () => {
     console.log(user);
   };
 
-  const editUserDetails = async () => {
-    await editUser(id, user);
+  const addUserDetails = async () => {
+    await signUp(user);
     history.push("/all");
   };
 
@@ -51,7 +41,7 @@ const EditUser = () => {
     <Container maxWidth="sm">
       <Box my={5}>
         <Typography variant="h5" align="center">
-          Update User Details
+          Create Account
         </Typography>
         <FormGroup>
           <FormControl>
@@ -63,15 +53,7 @@ const EditUser = () => {
             />
           </FormControl>
           <FormControl>
-            <InputLabel>User Name</InputLabel>
-            <Input
-              onChange={(e) => onValueChange(e)}
-              name="username"
-              value={username}
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel>Email address</InputLabel>
+            <InputLabel>email</InputLabel>
             <Input
               onChange={(e) => onValueChange(e)}
               name="email"
@@ -79,21 +61,29 @@ const EditUser = () => {
             />
           </FormControl>
           <FormControl>
-            <InputLabel>Phone Number</InputLabel>
+            <InputLabel>password</InputLabel>
             <Input
               onChange={(e) => onValueChange(e)}
-              name="phone"
-              value={phone}
+              name="password"
+              value={password}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>Confirm Password</InputLabel>
+            <Input
+              onChange={(e) => onValueChange(e)}
+              name="password"
+              value={confirmPassword}
             />
           </FormControl>
           <Box my={3}>
             <Button
               variant="contained"
-              onClick={() => editUserDetails()}
+              onClick={() => addUserDetails()}
               color="primary"
               align="center"
             >
-              Update User
+              Send
             </Button>
             <Button
               onClick={() => history.push("/all")}
@@ -111,4 +101,4 @@ const EditUser = () => {
   );
 };
 
-export default EditUser;
+export default CreateAccount;

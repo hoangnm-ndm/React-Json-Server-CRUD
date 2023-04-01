@@ -8,7 +8,7 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
-import { deleteUser, getallUsers } from "../service/api";
+import { deleteProduct, getallProducts } from "../service/api";
 import { Link } from "react-router-dom";
 
 const useStyle = makeStyles({
@@ -30,23 +30,23 @@ const useStyle = makeStyles({
   },
 });
 
-const AllUsers = () => {
+const AllProducts = () => {
   const classes = useStyle();
 
-  const [user, setUser] = useState([]);
+  const [product, setProduct] = useState([]);
   useEffect(() => {
-    getUsers();
+    getProducts();
   }, []);
 
-  const getUsers = async () => {
-    const response = await getallUsers();
+  const getProducts = async () => {
+    const response = await getallProducts();
     // console.log(response);
-    setUser(response.data);
+    setProduct(response.data);
   };
 
   const deleteData = async (id) => {
-    await deleteUser(id);
-    getUsers();
+    await deleteProduct(id);
+    getProducts();
   };
 
   return (
@@ -61,7 +61,7 @@ const AllUsers = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {user.map((data) => (
+        {product.map((data) => (
           <TableRow key={data.id} className={classes.trow}>
             <TableCell>{data.id}</TableCell>
             <TableCell>{data.name}</TableCell>
@@ -93,4 +93,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default AllProducts;

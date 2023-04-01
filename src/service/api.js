@@ -1,20 +1,24 @@
 import axios from "axios";
 
-const url = "http://localhost:8088/api/products";
+const url = "http://localhost:8088/api";
 
-export const getallUsers = async (id) => {
+export const getallProducts = async (id) => {
   id = id || "";
-  return await axios.get(`${url}/${id}`);
+  return await axios.get(`${url}/products/${id}`);
 };
 
-export const addUser = async (user) => {
-  return await axios.post(url, user);
+export const addProduct = async (product) => {
+  return await axios.post(`${url}/products/`, product);
 };
 
-export const editUser = async (id, user) => {
-  return await axios.put(`${url}/${id}`, user);
+export const editProduct = async (id, product) => {
+  return await axios.put(`${url}/products/${id}`, product);
 };
 
-export const deleteUser = async (id) => {
-  return await axios.delete(`${url}/${id}`);
+export const deleteProduct = async (id) => {
+  return await axios.delete(`${url}/products/${id}`);
+};
+
+export const signUp = async (user) => {
+  return await axios.post(`${url}/signup/`, user);
 };
